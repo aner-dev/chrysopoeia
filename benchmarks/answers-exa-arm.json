@@ -1,0 +1,230 @@
+{
+  "f01": {
+    "id": "f01",
+    "query": "k3s coredns ndots 5 cname external dns timeout",
+    "class": "error",
+    "results": [
+      {
+        "title": "coreDNS unable to resolve upstream",
+        "source": "github.com/k3s-io/k3s/issues/53",
+        "content": "K3S_RESOLV_CONFIG custom DNS workaround; removing sed workaround from cm/coredns works without custom TLD."
+      },
+      {
+        "title": "Advanced Options / Configuration | K3s",
+        "source": "docs.k3s.io/advanced",
+        "content": "Nameserver viability checks: node checks /etc/resolv.conf for loopback/multicast/link-local; kubelet configured via --resolv-conf."
+      },
+      {
+        "title": "Your K3s DNS Fails a Few Times a Day: ndots:5 and conntrack",
+        "source": "kubo.hexabase.io/blog/en/k3s-dns-intermittent-ndots-conntrack-race",
+        "content": "ndots:5 forces search-domain lookups before absolute name; external domain with 2 dots generates multiple queries."
+      },
+      {
+        "title": "Issue with DNS Resolution in Airgapped K3s UDP 53",
+        "source": "github.com/k3s-io/k3s/issues/11270",
+        "content": "Airgapped cluster blocks UDP 53; asking whether CoreDNS can be forced to TCP."
+      },
+      {
+        "title": "Pod DNS configuration instructions",
+        "source": "docs.volcengine.com/docs/vke/coredns-best-practices",
+        "content": "Pod /etc/resolv.conf nameserver + search suffixes; more suffixes mean more DNS queries."
+      }
+    ]
+  },
+  "f02": {
+    "id": "f02",
+    "query": "cilium envoy upstream_cx_none_healthy 503 egress gateway",
+    "class": "error",
+    "results": [
+      {
+        "title": "bugtool: Dump envoy metrics for troubleshooting",
+        "source": "github.com/cilium/cilium/pull/22797",
+        "content": "Dump Envoy metrics without reinstall; metrics signal TLS egress misconfiguration and 503/timeout causes."
+      },
+      {
+        "title": "Gateway API: Envoy keeps last pod IP, no healthy upstream -> 5s timeout 503",
+        "source": "github.com/cilium/cilium/issues/48460",
+        "content": "Single replica restarted with new IP stayed NotReady; requests returned 503 upstream connect error after ~5s."
+      },
+      {
+        "title": "Egress Gateway | Cilium",
+        "source": "docs.cilium.io/en/stable/network/egress-gateway/egress-gateway/",
+        "content": "Egress gateway SNATs matching pod traffic to predictable gateway-node IPs for legacy firewalls."
+      },
+      {
+        "title": "Gateway API Envoy cannot connect to backend pod on same node",
+        "source": "github.com/cilium/cilium/issues/47898",
+        "content": "Remote-node backend works, same-node backend cannot establish TCP; intermittent 503 upstream connect error."
+      },
+      {
+        "title": "IPSec + Kind: Egress HTTP policy breaking inter-node connectivity",
+        "source": "github.com/cilium/cilium/issues/16376",
+        "content": "Envoy returns 503 for cross-node HTTP request with IPSec enabled and egress policy."
+      }
+    ]
+  },
+  "f03": {
+    "id": "f03",
+    "query": "flux kustomization drift detected patch failure",
+    "class": "error",
+    "results": [
+      {
+        "title": "Kustomization | Flux",
+        "source": "fluxcd.io/flux/components/kustomize/kustomizations/",
+        "content": "Flux Kustomization clones repo, builds YAML, validates with server-side apply dry-run, applies to cluster."
+      },
+      {
+        "title": "fluxcd/kustomize-controller",
+        "source": "github.com/fluxcd/kustomize-controller",
+        "content": "Detects drift between desired and cluster state; corrects drift by patching; SOPS decryption."
+      },
+      {
+        "title": "Kustomization schema: drift detection and patch failure",
+        "source": "schemas.fluxoperator.dev/k/kustomize.toolkit.fluxcd.io/kustomization/v1/",
+        "content": "force=true recreates resources when patching fails due to immutable field; ignore rules exclude JSON pointer paths."
+      },
+      {
+        "title": "Selective drift correction with ignore rules | Flux",
+        "source": "fluxcd.io/blog/2026/08/ignore-rules-drift-detection/",
+        "content": "Kustomize-controller periodic dry-run detects drift; ignore rules let Flux leave specific fields alone."
+      },
+      {
+        "title": "Feature request: DriftDetection option for Kustomization",
+        "source": "github.com/fluxcd/kustomize-controller/issues/1498",
+        "content": "Request for Kustomization drift detection option analogous to HelmRelease."
+      }
+    ]
+  },
+  "f04": {
+    "id": "f04",
+    "query": "longhorn replica rebuild stuck volume detached",
+    "class": "error",
+    "results": [
+      {
+        "title": "[BUG] v2 Engine loops detaching and attaching after rebuilding",
+        "source": "github.com/longhorn/longhorn/issues/10396",
+        "content": "After rebuild, snapshot purge removes system snapshots; v2 volume stuck in detaching-attaching loop."
+      },
+      {
+        "title": "[BUG] Remove v2 volume rebuild snapshot could cause stuck",
+        "source": "github.com/longhorn/longhorn/issues/7573",
+        "content": "Deleting rebuild-* snapshots after reattach can leave volume in detaching/faulted state."
+      },
+      {
+        "title": "[BUG] Volume stuck Detaching during rebuild (EXT4)",
+        "source": "github.com/longhorn/longhorn/issues/2640",
+        "content": "FIEMAP call gives control to kernel; EXT4 kernels below 5.8 slow rebuild/coalescing."
+      }
+    ]
+  },
+  "f05": {
+    "id": "f05",
+    "query": "podman pasta rootless dns 10s delay container",
+    "class": "error",
+    "results": [
+      {
+        "title": "RFE: TCP DNS resolution fails with rootless pasta",
+        "source": "github.com/podman-container-tools/podman/issues/23239",
+        "content": "TCP DNS queries to podman network DNS time out with pasta; UDP works; slirp4netns works."
+      },
+      {
+        "title": "host dns resolution broken with rootless podman",
+        "source": "github.com/podman-container-tools/podman/issues/18934",
+        "content": "aardvark-dns cannot communicate with host systemd-resolved; delays before trying next nameserver."
+      },
+      {
+        "title": "Container DNS resolution not possible, no internet",
+        "source": "github.com/podman-container-tools/podman/discussions/24666",
+        "content": "Rootless podman default resolv.conf has no internet; modifying nameserver to 1.1.1.1 works."
+      }
+    ]
+  },
+  "f06": {
+    "id": "f06",
+    "query": "forgejo actions checkout vendored action 404",
+    "class": "error",
+    "results": [
+      {
+        "title": "Forgejo Actions | Using Actions",
+        "source": "forgejo.org/docs/latest/user/actions/actions/",
+        "content": "Reusable actions; checkout example uses https://data.forgejo.org/actions/checkout@v7."
+      },
+      {
+        "title": "Forgejo Actions administrator guide",
+        "source": "forgejo.org/docs/latest/admin/actions/",
+        "content": "Forgejo Runner executes workflows from .forgejo/workflows; installed separately."
+      },
+      {
+        "title": "RUNNER.md rootless registration",
+        "source": "gitdab.com/andodeki/nigig-org/raw/branch/main/.forgejo/RUNNER.md",
+        "content": "Registration token via repo Settings > Actions > Runners; Gitea Actions API compatible with forgejo-runner."
+      }
+    ]
+  },
+  "f07": {
+    "id": "f07",
+    "query": "victoriametrics vmsingle latest release 2026",
+    "class": "freshness",
+    "results": [
+      {
+        "title": "VictoriaMetrics v1.156.0 release",
+        "source": "github.com/VictoriaMetrics/VictoriaMetrics/releases/tag/v1.156.0",
+        "content": "Released 2026-11-09; enterprise components use -eula flag; license flags deprecated."
+      },
+      {
+        "title": "CHANGELOG 2026 VictoriaMetrics",
+        "source": "docs.victoriametrics.com/victoriametrics/changelog/changelog_2026/",
+        "content": "Chronological releases v1.156.0 down to v1.148.5 with dates."
+      },
+      {
+        "title": "Helm Charts VictoriaMetrics Single changelog",
+        "source": "docs.victoriametrics.com/helm/victoria-metrics-single/changelog/",
+        "content": "v0.51.0 released 09 Nov 2026 bumping VM components to v1.156.0."
+      }
+    ]
+  },
+  "f08": {
+    "id": "f08",
+    "query": "cilium 1.21 release notes egress gateway",
+    "class": "freshness",
+    "results": [
+      {
+        "title": "Release 1.21.0-pre.4 cilium",
+        "source": "github.com/cilium/cilium/releases/tag/v1.21.0-pre.4",
+        "content": "Multi-pool Resource IPAM, Gateway API Inference Extension, ingressController insecure/secure port flags."
+      },
+      {
+        "title": "Releases cilium/cilium",
+        "source": "github.com/cilium/cilium/releases",
+        "content": "Release index including 1.21 pre-releases."
+      },
+      {
+        "title": "1.21.0-pre.0",
+        "source": "github.com/cilium/cilium/releases/tag/v1.21.0-pre.0",
+        "content": "Datapath and operator changes for 1.21 cycle."
+      }
+    ]
+  },
+  "f09": {
+    "id": "f09",
+    "query": "fluxcd notification controller new features 2026",
+    "class": "freshness",
+    "results": [
+      {
+        "title": "notification-controller CHANGELOG v1 APIs",
+        "source": "github.com/fluxcd/notification-controller/blob/main/CHANGELOG.md",
+        "content": "v1.10.0 released 2026-10-24; Event/Alert/Provider APIs promoted to v1; SPIFFE mTLS."
+      },
+      {
+        "title": "Announcing Flux 2.10 GA",
+        "source": "fluxcd.io/blog/2026/10/flux-v2.10.0/",
+        "content": "Controllers authenticate with mTLS using X509-SVIDs from SPIFFE Workload API."
+      },
+      {
+        "title": "Announcing Flux 2.8 GA",
+        "source": "fluxcd.io/blog/2026/02/flux-v2.8.0/",
+        "content": "New notification provider types for PR comments (github/gitlab/gitea)."
+      }
+    ]
+  }
+}
