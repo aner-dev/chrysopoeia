@@ -85,7 +85,26 @@ First routing measurement in our deployment: **15 `web_search` calls, 0
 failure of the pattern; it is the reason the measurement and the opt-in guard
 exist. Skill prose alone did not move the agent.
 
-### What is NOT measured — do not extrapolate
+#### First paired benchmark (v1, 2026-11-20)
+
+A reproducible harness is included in [`benchmarks/`](benchmarks/). First run:
+6 paired coding queries, local vs Exa keyless, deterministic surface judge
+(source authority + title/query overlap):
+
+| class | local | exa | ratio |
+|---|---|---|---|
+| error ×2 | 0.767 / 0.780 | 0.800 / 0.867 | 0.96 / 0.90 |
+| freshness | **0.947** | 0.860 | **1.10** |
+| longtail | 0.690 | 0.713 | 0.97 |
+| bulk | 0.816 | 0.810 | 1.01 |
+| locale | 0.580 | 0.650 | 0.89 |
+| **mean** | **0.763** | **0.783** | **97%** |
+
+`python3 benchmarks/judge.py` reproduces it. Read [`benchmarks/RESULTS-v1.md`](benchmarks/RESULTS-v1.md)
+before quoting the number: it is a **surface proxy**, not an answer-quality
+judge, n=6, Exa keyless only.
+
+## What is NOT measured — do not extrapolate
 
 - **Index breadth and relevance**: no blinded head-to-head with Exa, Brave,
   Tavily or Jina. Paid engines have indexing infrastructure and semantic rankers
@@ -226,6 +245,11 @@ infra/
 tests/
   test-fetch.sh
   test-degradation-status.mjs
+benchmarks/
+  queries.jsonl                # paired query set (agent-drafted, operator-reviewable)
+  run_local.sh                 # local arm, zero cost
+  judge.py                     # deterministic surface judge (no LLM, no cost)
+  RESULTS-v1.md                # first paired run + caveats
 ```
 
 This repository is the portable pattern. The production deployment, ODD
