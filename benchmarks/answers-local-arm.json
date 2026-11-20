@@ -1,0 +1,225 @@
+{
+  "f01": {
+    "id": "f01",
+    "query": "k3s coredns ndots 5 cname external dns timeout",
+    "class": "error",
+    "results": [
+      {
+        "title": "Kubernetes DNS Configuration: CoreDNS and dnsPolicy",
+        "url": "https://kubernetes.recipes/recipes/networking/kubernetes-dns-configuration/",
+        "content": "[](https://twitter.com/intent/tweet?text=Kubernetes%20DNS%20Configuration%3A%20CoreDNS%20and%20dnsPolicy&url=https%3A%2F%2Fkubernetes.recipes%2Frecipes%2Fnetworking%2Fkubernetes-dns-configuration%2F \"Share on X\")[](https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fkubernetes.recipes%2Frecipes%2Fnetworking%2Fkubernetes-dns-configuration%2F \"Share on LinkedIn\")[](https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fkubernetes.recipes%2Frecipes%2Fnetworking%2Fkubernetes-dns-configuration%2F&t=Kubernetes%20DNS%20Configuration%3A%20CoreDNS%20and%20dnsPolicy \"Share on Hacker News\")[](https://reddit.com/submit?url=https%3A%2F%2Fkubernetes.recipes%2Frecipes%2Fnetworking%2Fkubernetes-dns-configuration%2F&title=Kubernetes%20DNS%20Configuration%3A%20CoreDNS%20and%20dnsPolicy \"Share on Reddit\")\n\nNetworking intermediate ⏱ 15 minutes K8s 1.28+\n\n# Kubernetes DNS Configuration: CoreDN"
+      },
+      {
+        "title": "Kubernetes DNS 5-Second Timeouts and ndots | SeaGit",
+        "url": "https://seagit.com/blogs/debugging-kubernetes-dns-coredns-ndots-field-guide",
+        "content": "[← All posts](/blogs)\n\nDevOpsJuly 16, 202619 views0 comments\n\n# Kubernetes DNS 5-Second Timeouts and ndots\n\nBy Muhammad Soliman\n\n#kubernetes#dns#coredns#ndots#troubleshooting\n\nA Kubernetes DNS problem usually shows up as a slow request, not as a DNS error. The application waits, a retry succeeds, and the latency graph grows a spike every few seconds. The two symptoms people search for most are a lookup that takes exactly five seconds, and a service that makes far more DNS queries than its code suggests. Both usually trace back to two settings in the pod's resolver configuration: `ndots` and the resolver timeout. This guide explains how each one works, shows how to read them, and gives a checklist that isolates the failing hop.\n\n## TL;DR\n\n*   A lookup of an external name such as `api.stripe.com` can cost five to six queries because `ndots:5` makes the resolver try every search domain firs"
+      },
+      {
+        "title": "Strange DNS behavior in some containers including cert-manager",
+        "url": "https://github.com/k3s-io/k3s/issues/5045",
+        "content": "# Strange DNS behavior in some containers including cert-manager · Issue #5045 · k3s-io/k3s\n\nYou signed in with another tab or window. [Reload]() to refresh your session. You signed out in another tab or window. [Reload]() to refresh your session. You switched accounts on another tab or window. [Reload]() to refresh your session. Dismiss alert \n\n## Repository navigation\n\n \n\n[](/k3s-io/k3s)\n\n# Strange DNS behavior in some containers including cert-manager #5045\n\n[New issue](/login?return_to=https://github.com/k3s-io/k3s/issues/5045)\n\nCopy link\n\n[New issue](/login?return_to=https://github.com/k3s-io/k3s/issues/5045)\n\nCopy link\n\nClosed\n\nClosed\n\n[Strange DNS behavior in some containers including cert-manager](/k3s-io/k3s/issues/5045#top)#5045\n\nCopy link\n\n## Description\n\n[![@macklenc](https://avatars.githubusercontent.com/u/2138018?u=c8bd44a46c757806ecd6e02c9113c84a3c90ab09&v=4&size=48)](http"
+      }
+    ]
+  },
+  "f02": {
+    "id": "f02",
+    "query": "cilium envoy upstream_cx_none_healthy 503 egress gateway",
+    "class": "error",
+    "results": [
+      {
+        "title": "Gateway API: Envoy keeps the last pod IP when a Service loses ... - GitHub",
+        "url": "https://github.com/cilium/cilium/issues/48460",
+        "content": "# Gateway API: Envoy keeps the last pod IP when a Service loses its last active backend (no empty ClusterLoadAssignment is pushed), turning \"no healthy upstream\" into 5s connect-timeout 503s · Issue #48460 · cilium/cilium\n\nYou signed in with another tab or window. [Reload]() to refresh your session. You signed out in another tab or window. [Reload]() to refresh your session. You switched accounts on another tab or window. [Reload]() to refresh your session. Dismiss alert \n\n## Repository navigation\n\n \n\n[](/cilium/cilium)\n\n# Gateway API: Envoy keeps the last pod IP when a Service loses its last active backend (no empty ClusterLoadAssignment is pushed), turning \"no healthy upstream\" into 5s connect-timeout 503s #48460\n\n[New issue](/login?return_to=https://github.com/cilium/cilium/issues/48460)\n\nCopy link\n\n[New issue](/login?return_to=https://github.com/cilium/cilium/issues/48460)\n\nCopy link"
+      },
+      {
+        "title": "no healthy upstream: How to Fix the Envoy 503 Error",
+        "url": "https://enterno.io/en/s/ssl-error-envoy-no-healthy-upstream",
+        "content": "# no healthy upstream: How to Fix the Envoy 503 Error\n\n[Skip to content](#main-content)\n\n# no healthy upstream (Envoy, Istio): Why the Cluster Has No Endpoints\n\n By [The enterno.io team](/en/about#team) · Updated Oct 20, 2026 \n\n**What it means:** Envoy found no usable endpoint in the target cluster and answered 503 itself, without contacting your backend.\n\n1.  List the cluster's endpoints in Envoy\n2.  Check that pods are Ready and selected\n3.  Compare Service, subset and pod labels\n4.  Fix the health check path and port\n\nFree online tool — [HTTP status code checker](/en/http-status): instant results, no signup.\n\n## Test your URL now\n\nRequests the address and shows the status code and what the server sends back.\n\nWebsite addressTest now\n\n[Check your site's status code →](/en/http-status#focus) 📋 Copy as markdown \n\n## What \"no healthy upstream\" means\n\n`no healthy upstream` is a local reply"
+      }
+    ]
+  },
+  "f03": {
+    "id": "f03",
+    "query": "flux kustomization drift detected patch failure",
+    "class": "error",
+    "results": [
+      {
+        "title": "Troubleshooting cheatsheet - Flux",
+        "url": "https://fluxcd.io/flux/cheatsheets/troubleshooting/",
+        "content": "# Troubleshooting cheatsheet\n\nShowcase various ways to get more information out of Flux controllers to debug potential problems.\n\n## Getting basic information\n\n#### Quick overview\n\nTo quickly list all Flux resources in your cluster, use the `fluxcd` [CRD category](/flux/cheatsheets/crd-resource-categories/): `kubectl get fluxcd -A`. You can also use `kubectl get fluxcd-sources -A` or `kubectl get fluxcd-appliers -A` to filter by Flux CRD categories.\n\nShow all Flux objects that are not ready\n\n```cli\nflux get all -A --status-selector ready=false\n```\n\nShow flux warning events\n\n```cli\nkubectl get events -n flux-system --field-selector type=Warning\n```\n\nFlux CLI (check for `Ready=True` and `Suspend=False`)\n\n```cli\nflux get sources all -A\n```\n\nSee the CLI reference for [`get_sources_all`](/flux/cmd/flux_get_sources_all/).\n\n`kubectl` (check for `Ready=True`)\n\n```cli\nkubectl get gitrepositories."
+      },
+      {
+        "title": "Kustomization - Flux CD",
+        "url": "https://fluxcd.io/flux/components/kustomize/kustomizations/",
+        "content": "# Kustomization\n\nThe GitOps Toolkit Custom Resource Definitions documentation.\n\nThe `Kustomization` API defines a pipeline for fetching, decrypting, building, validating and applying Kustomize overlays or plain Kubernetes manifests. The `Kustomization` Custom Resource Definition is the counterpart of Kustomize’s `kustomization.yaml` config file.\n\n## Example\n\nThe following is an example of a Flux Kustomization that reconciles the Kubernetes manifests stored in a Git repository.\n\n```yaml\napiVersion: source.toolkit.fluxcd.io/v1\nkind: GitRepository\nmetadata:\n  name: podinfo\n  namespace: default\nspec:\n  interval: 5m\n  url: https://github.com/stefanprodan/podinfo\n  ref:\n    branch: master\n---\napiVersion: kustomize.toolkit.fluxcd.io/v1\nkind: Kustomization\nmetadata:\n  name: podinfo\n  namespace: default\nspec:\n  interval: 10m\n  targetNamespace: default\n  sourceRef:\n    kind: GitRepository\n    name"
+      },
+      {
+        "title": "flux debug kustomization - Flux CD",
+        "url": "https://fluxcd.io/flux/cmd/flux_debug_kustomization/",
+        "content": "# flux debug kustomization\n\n## flux debug kustomization\n\nDebug a Flux Kustomization resource\n\n### Synopsis\n\nThe debug kustomization command can be used to troubleshoot failing Flux Kustomization reconciliations. WARNING: This command will print sensitive information if Kubernetes Secrets are referenced in the Kustomization .spec.postBuild.substituteFrom field.\n\n⚠️ Please note that this command is in preview and under development. While we try our best to not introduce breaking changes, they may occur when we adapt to new features and/or find better ways to facilitate what it does.\n\n```\nflux debug kustomization [name] [flags]\n```\n\n### Examples\n\n```\n  # Print the status of a Flux Kustomization\n  flux debug ks podinfo --show-status\n\n  # Export the final variables used for post-build substitutions composed from referred ConfigMaps and Secrets\n  flux debug ks podinfo --show-vars > vars.env\n\n "
+      }
+    ]
+  },
+  "f04": {
+    "id": "f04",
+    "query": "longhorn replica rebuild stuck volume detached",
+    "class": "error",
+    "results": [
+      {
+        "title": "Longhorn Volume Recovery: Fix Degraded, Faulted, and Stuck States ...",
+        "url": "https://perlod.com/tutorials/longhorn-troubleshooting-guide/",
+        "content": "# Longhorn Volume Recovery: Fix Degraded, Faulted, and Stuck States\n\n# The Complete Longhorn Troubleshooting Guide for Kubernetes Storage\n\nUpdated on Sep 13, 2026\n\nKN\n\nKimberly N\n\n10 MINS READ\n\nTable of Contents\n\n*   [What Are Longhorn Volume States](#what-are-longhorn-volume-states)\n*   [Before You Start: Requirements and Setup Check](#before-you-start-requirements-and-setup-check)\n*   [How to Fix Longhorn Degraded Volume Errors (Replica Failures)](#how-to-fix-longhorn-degraded-volume-errors-replica-failures)\n*   [Step 1: Find the failed replica](#step-1-find-the-failed-replica)\n*   [Step 2: Check why it failed](#step-2-check-why-it-failed)\n*   [Step 3: Fix Longhorn degraded volume replicas quickly](#step-3-fix-longhorn-degraded-volume-replicas-quickly)\n*   [Step 4: If the same node keeps producing failed replicas](#step-4-if-the-same-node-keeps-producing-failed-replicas)\n*   [Fix Fault"
+      },
+      {
+        "title": "[BUG] Volumes not able to attach or detach · Issue #2401 · longhorn ...",
+        "url": "https://github.com/longhorn/longhorn/issues/2401",
+        "content": "# [BUG] Volumes not able to attach or detach · Issue #2401 · longhorn/longhorn\n\nYou signed in with another tab or window. [Reload]() to refresh your session. You signed out in another tab or window. [Reload]() to refresh your session. You switched accounts on another tab or window. [Reload]() to refresh your session. Dismiss alert \n\n## Repository navigation\n\n \n\n[](/longhorn/longhorn)\n\n# \\[BUG\\] Volumes not able to attach or detach #2401\n\n[New issue](/login?return_to=https://github.com/longhorn/longhorn/issues/2401)\n\nCopy link\n\n[New issue](/login?return_to=https://github.com/longhorn/longhorn/issues/2401)\n\nCopy link\n\nOpen\n\nOpen\n\n[\\[BUG\\] Volumes not able to attach or detach](/longhorn/longhorn/issues/2401#top)#2401\n\nCopy link\n\nAssignees\n\n[![PhanLe1010](https://avatars.githubusercontent.com/u/22139961?s=64&u=d9fe02f7bdbf73b81446847133c05dfdd6caff7a&v=4)](/PhanLe1010)\n\nLabels\n\n[component/lo"
+      },
+      {
+        "title": "How to Troubleshoot Longhorn Replica Rebuilding Loops",
+        "url": "https://oneuptime.com/blog/post/2026-03-20-longhorn-troubleshoot-replica-rebuilding/view",
+        "content": "# How to Troubleshoot Longhorn Replica Rebuilding Loops\n\n[](https://twitter.com/intent/tweet?text=How%20to%20Troubleshoot%20Longhorn%20Replica%20Rebuilding%20Loops&url=https%3A%2F%2Foneuptime.com%2Fblog%2Fpost%2F2026-03-20-longhorn-troubleshoot-replica-rebuilding%2Fview \"Share on X\") [](https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Foneuptime.com%2Fblog%2Fpost%2F2026-03-20-longhorn-troubleshoot-replica-rebuilding%2Fview \"Share on LinkedIn\") [](https://news.ycombinator.com/submitlink?u=https%3A%2F%2Foneuptime.com%2Fblog%2Fpost%2F2026-03-20-longhorn-troubleshoot-replica-rebuilding%2Fview&t=How%20to%20Troubleshoot%20Longhorn%20Replica%20Rebuilding%20Loops \"Discuss on Hacker News\") \n\n* * *\n\nLonghorn volumes become degraded when a replica fails or a node goes offline. The replica rebuilding process restores redundancy by copying data to a replacement replica. Rebuilding fai"
+      },
+      {
+        "title": "Fix Longhorn Volumes that refuses to attach • Maulana's Personal ...",
+        "url": "https://maulana.id/soft-dev/2021--12--21--00--fix-longhorn-volumes-that-refuses-to-attach/",
+        "content": "# Fix Longhorn Volumes that refuses to attach\n\n Index\n\nI’m quite impressed with Longhorn and I’ve been using it since before v1 version. The stack is not without bug, but it becomes more and more stable with new useful features added over time.\n\nThese are some issues that I encountered in the past and how to solve them.\n\n# Volumes got detached unexpectedly and can’t reattach\n\nPerhaps, because I’m using self-managed Kubernetes (I construct the cluster myself in Hetzner), very often my nodes experienced “disruptions”. My nodes are in Hetzner Cloud, which is a shared VPS. I assume, since it is a shared VPS, there are some limit imposed by Hetzner that cause all of my pods in that node be killed. In this situation, Kubernetes will not create new pods, but instead restart the container.\n\nThe problem is, when the container restarts, the CSI doesn’t attach anymore so you get container with inva"
+      },
+      {
+        "title": "Handling Persistent Replica Failures via Node or Disk Isolation",
+        "url": "https://longhorn.io/kb/troubleshooting-handling-persistent-replica-failures-via-node-or-disk-isolation/",
+        "content": "## Applicable Versions\n\nAll Longhorn versions.\n\n## Symptom\n\nA Longhorn Replica enters a **Failed** state due to environmental instability. When the user deletes the failed replica to trigger a rebuild, the scheduler may place the new replica on the same problematic node or disk. This results in a **Rebuild Loop**, with each new replica failing immediately on the unstable node or disk.\n\nCommon scenarios causing this behavior include:\n\n*   Host Disk Physical Errors: Bad sectors, I/O timeouts, or SMART errors detected in kernel logs (`dmesg`).\n*   Network Instability: A specific node experiences high latency or packet loss, causing the Longhorn engine to mark replicas as failed due to connection timeouts.\n*   Resource Exhaustion: The node is under extreme memory/CPU pressure, causing the `longhorn-instance-manager` pod to crash.\n\n## Root Cause\n\nLonghorn’s default behavior upon replica delet"
+      }
+    ]
+  },
+  "f05": {
+    "id": "f05",
+    "query": "podman pasta rootless dns 10s delay container",
+    "class": "error",
+    "results": [
+      {
+        "title": "rootless container and pasta network performance is very bad with ...",
+        "url": "https://github.com/podman-container-tools/podman/issues/28219",
+        "content": "# rootless container and pasta network performance is very bad with podman 5.8 · Issue #28219 · podman-container-tools/podman\n\nYou signed in with another tab or window. [Reload]() to refresh your session. You signed out in another tab or window. [Reload]() to refresh your session. You switched accounts on another tab or window. [Reload]() to refresh your session. Dismiss alert \n\n## Repository navigation\n\n \n\n[](/podman-container-tools/podman)\n\n# rootless container and pasta network performance is very bad with podman 5.8 #28219\n\n[New issue](/login?return_to=https://github.com/podman-container-tools/podman/issues/28219)\n\nCopy link\n\n[New issue](/login?return_to=https://github.com/podman-container-tools/podman/issues/28219)\n\nCopy link\n\nClosed\n\nClosed\n\n[rootless container and pasta network performance is very bad with podman 5.8](/podman-container-tools/podman/issues/28219#top)#28219\n\nCopy li"
+      },
+      {
+        "title": "podman-build.unit",
+        "url": "https://docs.podman.io/en/latest/markdown/podman-build.unit.5.html",
+        "content": "# NAME\n\npodman-build.unit - systemd unit files for building container images using Podman Quadlet\n\n# SYNOPSIS\n\n*name*.build\n\n# DESCRIPTION\n\nBuild files are named with a `.build` extension and contain a section `[Build]` describing the image build command. The generated service is a one-shot service that ensures that the image is built on the host from a supplied Containerfile and context directory. Subsequent (re-)starts of the generated build service will usually finish quickly, as image layer caching will skip unchanged build steps.\n\nA minimal `.build` unit needs at least `ImageTag=` and either `File=` or `SetWorkingDirectory=`.\n\nUsing build units allows containers and volumes to depend on images being built locally. This can be interesting for creating container images not available on container registries, or for local testing and development.\n\n# USAGE SUMMARY\n\nThe `.build` file is p"
+      },
+      {
+        "title": "How to Fix Rootless Podman Network Issues - OneUptime",
+        "url": "https://oneuptime.com/blog/post/2026-03-18-fix-rootless-podman-network-issues/view",
+        "content": "# How to Fix Rootless Podman Network Issues\n\n[](https://twitter.com/intent/tweet?text=How%20to%20Fix%20Rootless%20Podman%20Network%20Issues&url=https%3A%2F%2Foneuptime.com%2Fblog%2Fpost%2F2026-03-18-fix-rootless-podman-network-issues%2Fview \"Share on X\") [](https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Foneuptime.com%2Fblog%2Fpost%2F2026-03-18-fix-rootless-podman-network-issues%2Fview \"Share on LinkedIn\") [](https://news.ycombinator.com/submitlink?u=https%3A%2F%2Foneuptime.com%2Fblog%2Fpost%2F2026-03-18-fix-rootless-podman-network-issues%2Fview&t=How%20to%20Fix%20Rootless%20Podman%20Network%20Issues \"Discuss on Hacker News\") \n\n* * *\n\n> \"Most rootless Podman network issues stem from missing configurations, not missing capabilities.\"\n\nRunning Podman without root privileges is a security win, but networking in rootless mode works differently than in rootful mode. For the "
+      }
+    ]
+  },
+  "f06": {
+    "id": "f06",
+    "query": "forgejo actions checkout vendored action 404",
+    "class": "error",
+    "results": [
+      {
+        "title": "Configuration Cheat Sheet | Forgejo – Beyond coding. We forge.",
+        "url": "https://forgejo.org/docs/v15.0/admin/config-cheat-sheet/",
+        "content": "*   [Repository - MIME type mapping (repository.mimetype\\_mapping)](#repository---mime-type-mapping-repositorymimetype_mapping)\n*   [SSH Minimum Key Sizes (ssh.minimum\\_key\\_sizes)](#ssh-minimum-key-sizes-sshminimum_key_sizes)\n*   [Issue and pull request attachments (attachment)](#issue-and-pull-request-attachments-attachment)\n*   [Console log mode (log.console, or MODE=console)](#console-log-mode-logconsole-or-modeconsole)\n*   [File log mode (log.file, or MODE=file)](#file-log-mode-logfile-or-modefile)\n*   [Conn log mode (log.conn, or MODE=conn)](#conn-log-mode-logconn-or-modeconn)\n*   [Cron (cron)](#cron-cron)\n*   [Basic cron tasks - enabled by default](#basic-cron-tasks---enabled-by-default)\n*   [Cron - Cleanup old repository archives (cron.archive\\_cleanup)](#cron---cleanup-old-repository-archives-cronarchive_cleanup)\n*   [Cron - Update Mirrors (cron.update\\_mirrors)](#cron---update-"
+      },
+      {
+        "title": "Porting a GitHub Actions workflow to Forgejo Actions | Erfi's Lexicanum",
+        "url": "https://erfi.dev/guides/porting-github-actions-to-forgejo/",
+        "content": "Forge and CIguide\n\n# Porting a GitHub Actions workflow to Forgejo Actions\n\nA workflow that runs on GitHub-hosted runners fails in at least one way on a self-hosted Forgejo runner, and the failures are scattered: the artifact API, anonymous `api.github.com` calls, runner labels, secret names, and a pair of Forgejo-side switches that keep a workflow from running at all. This guide ports this site’s own build-and-deploy pipeline and records each difference with the fix used and the way it was checked.\n\nThe worked example is two workflows: `deploy.yml` (build, test, deploy to Cloudflare Workers static assets, purge the zone cache) and `link-check.yml` (weekly link check that files an issue on failure). `bun run build` is `bun test tests --bail && astro build && bun run verify:docs`, so the build step is the test gate: PRs get the gate, only main (or a manual dispatch) deploys.\n\nPrerequisites"
+      },
+      {
+        "title": "Forgejo: custom/conf/app.example.ini - Fossies",
+        "url": "https://fossies.org/linux/forgejo/custom/conf/app.example.ini",
+        "content": "The \"[Fossies](/)\" Software Repository \n\n... curated Free Open Source Software mainly for Internet, Engineering and Science ... \n\n* * *\n\n## Sorry, this direct access to fossies.org now requires a short anti-robot check:\n\nTo protect the Fossies server from unwanted and abusive traffic in the interest of real human users,  \n direct access to the server is only possible if you either simply click on the \"Go\" button below for just a single access,  \n or, as recommended, enter additionally a descriptive word or brief comment about Fossies to whitelist your IP address for a while:\n\n   \n\nYour original request:  **https://fossies.org/linux/forgejo/custom/conf/app.example.ini**  \n\nIn case of problems, please send an email to [info@fossies.org](\\\"mailto:info@fossies.org\\\"). \n\nThank you for your understanding! \n\n* * *\n\nA tip: As a general \"challenge\"-free alternative, you can go to the Fossies [hom"
+      }
+    ]
+  },
+  "f07": {
+    "id": "f07",
+    "query": "victoriametrics vmsingle latest release 2026",
+    "class": "freshness",
+    "results": [
+      {
+        "title": "CHANGELOG: Year 2026 - VictoriaMetrics Docs",
+        "url": "https://docs.victoriametrics.com/victoriametrics/changelog/changelog_2026/",
+        "content": "# VictoriaMetrics: CHANGELOG: Year 2026\n\n[# Year 2026 #](#)\n\n[](https://github.com/VictoriaMetrics/VictoriaMetrics/edit/master/docs/victoriametrics/changelog/CHANGELOG.md)\n\nThe following `tip` changes can be tested by building VictoriaMetrics components from the latest commits according to the following docs:\n\n*   [How to build single-node VictoriaMetrics](/victoriametrics/single-server-victoriametrics/#how-to-build-from-sources)\n*   [How to build cluster version of VictoriaMetrics](/victoriametrics/cluster-victoriametrics/#building-from-sources)\n\nMetrics of the latest version of VictoriaMetrics cluster are available for viewing at our [sandbox](https://play-grafana.victoriametrics.com/d/oS7Bi_0Wz_vm/victoriametrics-cluster-vm) . The sandbox cluster installation runs under the constant load generated by [prometheus-benchmark](https://github.com/VictoriaMetrics/prometheus-benchmark) and i"
+      },
+      {
+        "title": "VictoriaMetrics July 2026 Ecosystem Updates",
+        "url": "https://victoriametrics.com/blog/victoriametrics-july-2026-ecosystem-updates/",
+        "content": "![VictoriaMetrics July 2026 Ecosystem Updates](/blog/victoriametrics-july-2026-ecosystem-updates/preview.webp)\n\n# VictoriaMetrics July 2026 Ecosystem Updates\n\nPF\n\n[Pablo Fernandez](/blog/authors/pablo-fernandez/)\n\n![](/icons/blog/calendar.svg) Aug 10, 2026\n\n![](/icons/blog/clock.svg)\n\n5 mins read\n\n*   [Product News](/blog/categories/product-news/)\n*   [Company News](/blog/categories/company-news/)\n\nShare: [![Share on LinkedIn](/icons/blog/linkedin.svg)](https://www.linkedin.com/sharing/share-offsite/?url=https%3a%2f%2fvictoriametrics.com%2fblog%2fvictoriametrics-july-2026-ecosystem-updates%2f) [![Share on X (Twitter)](/icons/blog/X.svg)](https://twitter.com/intent/tweet?text=VictoriaMetrics%20July%202026%20Ecosystem%20Updates&url=https%3a%2f%2fvictoriametrics.com%2fblog%2fvictoriametrics-july-2026-ecosystem-updates%2f) [![Share via Email](/icons/blog/mail.svg)](mailto:?subject=VictoriaMe"
+      },
+      {
+        "title": "Releases · VictoriaMetrics/VictoriaMetrics - GitHub",
+        "url": "https://github.com/VictoriaMetrics/VictoriaMetrics/releases",
+        "content": "You signed in with another tab or window. [Reload]() to refresh your session. You signed out in another tab or window. [Reload]() to refresh your session. You switched accounts on another tab or window. [Reload]() to refresh your session. Dismiss alert \n\n## Repository navigation\n\n \n\n[](/VictoriaMetrics/VictoriaMetrics)\n\n# Releases\n\nReleases · VictoriaMetrics/VictoriaMetrics\n\n## v1.156.0\n\n[v1.156.0](/VictoriaMetrics/VictoriaMetrics/releases/tag/v1.156.0) [Latest](/VictoriaMetrics/VictoriaMetrics/releases/latest) \n\n[Latest](/VictoriaMetrics/VictoriaMetrics/releases/latest) \n\n Compare\n\n# Choose a tag to compare\n\n## Sorry, something went wrong.\n\n \n\n Filter\n\n Loading \n\n \n\n \n\n## Sorry, something went wrong.\n\n### Uh oh!\n\nThere was an error while loading. [Please reload this page]().\n\n \n\n## No results found\n\n \n\n[View all tags](/VictoriaMetrics/VictoriaMetrics/tags) \n\n \n\n![@f41gh7](https://avatar"
+      }
+    ]
+  },
+  "f08": {
+    "id": "f08",
+    "query": "cilium 1.21 release notes egress gateway",
+    "class": "freshness",
+    "results": [
+      {
+        "title": "Gateway API Support — Cilium 1.21.0-dev documentation",
+        "url": "https://docs.cilium.io/en/latest/network/servicemesh/gateway-api/gateway-api/",
+        "content": "# Gateway API Support[](#gateway-api-support \"Link to this heading\")\n\n## What is Gateway API?[](#what-is-gateway-api \"Link to this heading\")\n\nGateway API is a Kubernetes SIG-Network subproject to design a successor for the Ingress object. It is a set of resources that model service networking in Kubernetes, and is designed to be role-oriented, portable, expressive, and extensible.\n\nSee the [Gateway API site](https://gateway-api.sigs.k8s.io/) for more details.\n\n## Cilium Gateway API Support[](#cilium-gateway-api-support \"Link to this heading\")\n\nCilium supports Gateway API v1.6.3 for below resources, all the Core conformance tests are passed.\n\nAdditionally, Cilium provides `CiliumGatewayClassConfig` CRD, which can be referenced in [GatewayClass.parametersRef](https://gateway-api.sigs.k8s.io/reference/api-types/gatewayclass/#gatewayclass-parameters).\n\nVideo\n\n> If you’d like more insights"
+      },
+      {
+        "title": "Upgrade Guide — Cilium 1.21.0-dev documentation",
+        "url": "https://docs.cilium.io/en/latest/operations/upgrade/",
+        "content": "# Upgrade Guide[](#upgrade-guide \"Link to this heading\")\n\nThis upgrade guide is intended for Cilium running on Kubernetes. If you have questions, feel free to ping us on [Cilium Slack](https://slack.cilium.io).\n\nWarning\n\nRead the full upgrade guide to understand all the necessary steps before performing them.\n\nDo not upgrade to 1.21 before reading the section [1.20 Upgrade Notes](#current-release-required-changes) and completing the required steps. Skipping this step may lead to an non-functional upgrade.\n\nThe only tested rollback and upgrade path is between consecutive minor releases. Always perform rollbacks and upgrades between one minor release at a time. This means that going from (a hypothetical) 1.1 to 1.2 and back is supported while going from 1.1 to 1.3 and back is not.\n\nAlways update to the latest patch release of your current version before attempting an upgrade.\n\n## Running "
+      },
+      {
+        "title": "Migrating from Ingress to Gateway — Cilium 1.21.0-dev documentation",
+        "url": "https://docs.cilium.io/en/latest/network/servicemesh/ingress-to-gateway/ingress-to-gateway/",
+        "content": "# Migrating from Ingress to Gateway[](#migrating-from-ingress-to-gateway \"Link to this heading\")\n\nThe Gateway API is not only the long-term successor to the Ingress API, it also supports use cases beyond HTTP/HTTPS-based applications.\n\nThis section highlights some of the limitations with Ingress, explains some of the benefits of the Gateway API, and describes some of the options available with migrating from Ingress API to Gateway API.\n\n## Ingress API Limitations[](#ingress-api-limitations \"Link to this heading\")\n\nDevelopment of the Gateway API stemmed from the realization that the Kubernetes Ingress API has some limitations.\n\n*   Limited support for advanced routing\n\nThe Ingress API supports basic routing based on path and host rules, but it lacks native support for more advanced routing features such as traffic splitting, header modification, and URL rewriting.\n\n*   Limited protocol "
+      },
+      {
+        "title": "Gateway API Inference Extension — Cilium 1.21.0-dev documentation",
+        "url": "https://docs.cilium.io/en/latest/network/servicemesh/gateway-api/gie/",
+        "content": "# Gateway API Inference Extension[](#gateway-api-inference-extension \"Link to this heading\")\n\nGateway API Inference Extension (GIE) is an extension of Gateway API that optimizes self-hosting Generative Models on Kubernetes. GIE’s goal is to improve and standardize routing to inference workloads.\n\nRead more about [Gateway API Inference Extension in their docs](https://gateway-api-inference-extension.sigs.k8s.io).\n\nNote\n\nThis is a beta feature. Please provide feedback and file a GitHub issue if you experience any problems. Currently, Cilium partially conforms with the tests (but it skips `GatewayWeightedAcrossTwoInferencePools`). For now, a single HTTPRoute must reference at most one InferencePool. See [GitHub issue 49312](https://github.com/cilium/cilium/issues/49312).\n\n## Prerequisites[](#prerequisites \"Link to this heading\")\n\n*   Cilium must be configured with the kube-proxy replaceme"
+      },
+      {
+        "title": "Cilium Operator — Cilium 1.21.0-dev documentation",
+        "url": "https://docs.cilium.io/en/latest/internals/cilium_operator/",
+        "content": "# Cilium Operator[](#cilium-operator \"Link to this heading\")\n\nThis document provides a technical overview of the Cilium Operator and describes the cluster-wide operations it is responsible for.\n\n## Highly Available Cilium Operator[](#highly-available-cilium-operator \"Link to this heading\")\n\nThe Cilium Operator uses Kubernetes leader election library in conjunction with lease locks to provide HA functionality. The capability is supported on Kubernetes versions 1.14 and above. It is Cilium’s default behavior since the 1.9 release.\n\nThe number of replicas for the HA deployment can be configured using Helm option `operator.replicas`.\n\nHelm RepositoryOCI Registry\n\nhelm install cilium cilium/cilium --version 1.20.0 \\\n   --namespace kube-system \\\n   --set operator.replicas=3\n\nhelm install cilium oci://quay.io/cilium/charts/cilium --version 1.20.0 \\\n   --namespace kube-system \\\n   --set operat"
+      }
+    ]
+  },
+  "f09": {
+    "id": "f09",
+    "query": "fluxcd notification controller new features 2026",
+    "class": "freshness",
+    "results": [
+      {
+        "title": "Announcing Flux 2.10 GA",
+        "url": "https://fluxcd.io/blog/2026/10/flux-v2.10.0/",
+        "content": "[](https://fluxcd.io/blog/index.xml \"RSS\")\n\n# Announcing Flux 2.10 GA\n\nWe are thrilled to announce the release of Flux v2.10.0! Here you will find highlights of new features and improvements in this release.\n\nBy **Leigh Capili** | 2026-10-26\n\n##### Tags:\n\n*   [announcement](https://fluxcd.io/tags/announcement/)\n\nWe are thrilled to announce the release of [Flux v2.10.0](https://github.com/fluxcd/flux2/releases/tag/v2.10.0)! In this post, we highlight some of the new features and improvements included in this release.\n\n![](featured-image.png)\n\n## Highlights\n\nFlux v2.10 brings **SPIFFE workload identity** to the GitOps Toolkit. The Flux controllers can now authenticate each other with mutual TLS, and Flux objects can present short-lived SPIFFE credentials to registries, secret stores, remote Kubernetes clusters and more. This release also marks the General Availability of the Flux alerting "
+      },
+      {
+        "title": "CHANGELOG.md - fluxcd/notification-controller - GitHub",
+        "url": "https://github.com/fluxcd/notification-controller/blob/main/CHANGELOG.md",
+        "content": "# notification-controller/CHANGELOG.md at main · fluxcd/notification-controller\n\n# Changelog\n\n\n\nAll notable changes to this project are documented in this file.\n\n## 1.10.1\n\n\n\n**Release date:** 2026-11-20\n\nThis patch release fixes the credentials cache key used for provider authentication. The key now includes the GCP workload identity provider, so changing the `gcp.auth.fluxcd.io/workload-identity-provider` ServiceAccount annotation takes effect on the next reconcile instead of continuing to use tokens cached for the previous provider until they expire.\n\nFixes:\n\n*   Update fluxcd/pkg dependencies [#1428](https://github.com/fluxcd/notification-controller/pull/1428)\n\nImprovements:\n\n*   Remove leftover object-level workload identity log message [#1439](https://github.com/fluxcd/notification-controller/pull/1439)\n*   Update fluxcd/pkg dependencies [#1429](https://github.com/fluxcd/notificati"
+      },
+      {
+        "title": "Announcing Flux 2.9 GA",
+        "url": "https://fluxcd.io/blog/2026/06/flux-v2.9.0/",
+        "content": "[](https://fluxcd.io/blog/index.xml \"RSS\")\n\n# Announcing Flux 2.9 GA\n\nWe are thrilled to announce the release of Flux v2.9.0! Here you will find highlights of new features and improvements in this release.\n\nBy **Stefan Prodan** | 2026-06-30\n\n##### Tags:\n\n*   [announcement](https://fluxcd.io/tags/announcement/)\n\nWe are thrilled to announce the release of [Flux v2.9.0](https://github.com/fluxcd/flux2/releases/tag/v2.9.0)! In this post, we highlight some of the new features and improvements included in this release.\n\n![](featured-image.png)\n\n## Highlights\n\nFlux v2.9 introduces the **Flux CLI Plugin System**, a new way to extend the Flux command-line interface with first-class plugins. Alongside the plugin system, this release brings powerful additions to server-side apply, secrets decryption, and Git integrations.\n\nIn this release, we have introduced several new features to the Flux CLI and"
+      },
+      {
+        "title": "Argo CD vs Flux: Same Git, Different Control - Aleksei Aleinikov",
+        "url": "https://www.alekseialeinikov.com/en/blog/topics/devops/argo-cd-vs-flux",
+        "content": "# Argo CD vs Flux: Helm, Security and Which to Choose\n\nSaveCopy for AI\n\nShare\n\nCopy link[LinkedIn](https://www.linkedin.com/feed/?shareActive=true&text=Argo%20CD%20vs%20Flux%3A%20Same%20Git%2C%20Different%20Control%0A%0AArgo%20CD%20and%20Flux%20both%20reconcile%20Kubernetes%20from%20versioned%20configuration.%20Their%20Helm%20lifecycle%2C%20permissions%20and%20fleet%20architecture%20change%20how%20your%20team%20operates.%0A%0Ahttps%3A%2F%2Fwww.alekseialeinikov.com%2Fen%2Fblog%2Ftopics%2Fdevops%2Fargo-cd-vs-flux%2F%3Futm_source%3Dlinkedin%26utm_medium%3Dsocial%26utm_campaign%3Darticle_share \"LinkedIn\")[X](https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.alekseialeinikov.com%2Fen%2Fblog%2Ftopics%2Fdevops%2Fargo-cd-vs-flux%2F%3Futm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Darticle_share&text=Argo%20CD%20vs%20Flux%3A%20Same%20Git%2C%20Different%20Control&via=Aleksei_gr1 \"X\")[Bl"
+      },
+      {
+        "title": "Flux Roadmap",
+        "url": "https://fluxcd.io/roadmap/",
+        "content": "# Flux Roadmap\n\n#### Production readiness\n\nThe Flux latest [beta and stable APIs](/flux/components/) (including their reconcilers) are well tested and safe to use in production environments. The beta APIs will be replaced in time with stable versions.\n\nTo learn more about Flux supported versions and release cadence, please see the [Flux release process](/flux/releases/).\n\n## Milestones\n\nThe Flux project roadmap is divided into milestones representing minor releases, each with a set of goals and tasks. The milestones marked as **provisional** are subject to change based on the project’s priorities and the community’s feedback.\n\nPlease note that the Flux maintainers prioritize fixes to defects affecting GA APIs and security issues over new features. Depending on the volume of incoming issues and the complexity of the fixes, the roadmap may be adjusted and new features may be postponed to t"
+      }
+    ]
+  }
+}
