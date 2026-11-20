@@ -1,10 +1,16 @@
 # Chrysopoeia
 
-> *Turn paid search quotas into local, measured gold.*
+> ## ⚗️ Stop paying for AI web search. Free, self-hosted, local search engine.
+>
+> **A local drop-in for the paid-search leg of your agent**: replace Exa, Brave
+> Search API, Tavily, Jina and friends for the searches your workstation can
+> answer — with extracted content, zero marginal cost, no account, no key and no
+> rate limit.
 
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Built for Gentle Shell](https://img.shields.io/badge/built%20for-Gentle%20Shell-7c3aed.svg)](https://github.com/earendil-works/gentle-shell)
 [![Platform: Linux](https://img.shields.io/badge/platform-Linux-orange.svg)](#requirements)
+[![Cost: $0 marginal](https://img.shields.io/badge/cost-%240%20marginal-green.svg)](#honest-limitations--roi)
 
 **Chrysopoeia** (χρυσοποιία, *"the making of gold"*) is a small, portable
 pattern that gives a coding agent a **local web-fetch capability with content
@@ -17,8 +23,6 @@ workstation. It is also useful to any Linux agent harness that can run shell
 commands and load an extension: the producer is a shell script, the observer is
 a ~300-line TypeScript extension, and the policy is documentation. No Rust, no
 recompiled TUI, no patched agent runtime.
-
-The name is an alchemical joke with a precise mapping:
 
 | Alchemy | This project |
 |---|---|
@@ -54,9 +58,77 @@ outside — and is far cheaper to fix.
 | Latency (measured) | 1–3 s + up to 15 s of scrapes | **1.1–1.9 s** |
 | Content returned | links only | 4–5 results × up to 4000 chars of markdown |
 | Routing visibility | session-log forensics | TUI footer + `provider-choice.jsonl` |
-| Quota | burned on every search | zero marginal cost |
+| Cost per search | metered | **$0 marginal** (electricity + hardware you own) |
+| Account / API key | required | none for the local layers |
+| Rate limit | per account/day | none — bounded by your hardware |
 | "Five copies of the same docs page" | accepted as-is | deduplicated by normalized URL |
 | Local stack down | silent failure | paid path stays available (fail-open) |
+
+## Honest limitations & ROI
+
+Sincerity over slogans. This section is the one to read before replacing
+anything.
+
+### What is measured
+
+| Metric | Local (this stack) | Paid API (Exa, n=1 — see below) |
+|---|---|---|
+| Results with extracted content, one call | 4–5, up to 4000 chars each | 5 passages |
+| Latency for that call | **1.1–1.9 s** (5 queries) | ~1 s (1 query) |
+| Cost | $0 marginal | metered; free tier exhausted in ~2 sessions of heavy agent use |
+| Rate limit | hardware bound (concurrency 1–2 here) | per account/day; 429s were the origin of this project |
+| Query text stays local | yes | no — leaves your machine |
+| Routing observable by the agent | yes (footer + JSONL) | only a `Providers used:` line in the session log |
+
+First routing measurement in our deployment: **15 `web_search` calls, 0
+`fetch_local`, 5 of the paid ones errored — 0% local share**. That is not a
+failure of the pattern; it is the reason the measurement and the opt-in guard
+exist. Skill prose alone did not move the agent.
+
+### What is NOT measured — do not extrapolate
+
+- **Index breadth and relevance**: no blinded head-to-head with Exa, Brave,
+  Tavily or Jina. Paid engines have indexing infrastructure and semantic rankers
+  a two-container workstation cannot replicate. For hard, novel, long-tail
+  queries the paid API may simply find better sources.
+- **Recall / precision**: we measured *content parity* (can we get markdown in
+  one call?), **not** answer quality. There is no relevance judge here.
+- **Cold-query latency across many domains**: 5 queries on familiar technical
+  topics is a smoke benchmark, not a P50/P99 study.
+- **Freshness**: no systematic comparison of how fast each index picks up new
+  pages. Metasearch is often fresher, but we did not prove it.
+- **Reliability of engines**: SearXNG aggregates third-party engines; Brave
+  intermittently returns empty-host redirects here (we drop them fail-closed).
+  Engines change without notice. A paid API is one contract, not a shifting set.
+- **Uptime**: this is a single workstation. Sleep/poweroff = down. No SLO.
+- **Non-English / semantic queries**: our local queries in Spanish returned
+  42–46 results, but we have no relevance scoring against Exa's mostly-English
+  index. Do not claim a win where we did not measure one.
+
+### Where the ROI actually is
+
+The saving is not "local search is smarter". It is **you stop spending a
+metered resource on the searches that do not need it**:
+
+| Query class | Recommended path | Why |
+|---|---|---|
+| Error messages, stack traces, local docs, known domains | **Local** | keyword precision, zero cost, no rate limit |
+| Bulk / batch research, many queries | **Local** | marginal cost dominates the decision |
+| Spanish / locale-specific | **Local** (with the caveat above) | paid indexes skew English |
+| Fresh releases, today's prices/news | **Local** first | metasearch freshness, verify key facts |
+| Novel, ambiguous, long-tail conceptual research | **Paid** | index breadth and semantic ranking |
+| When the local stack is down | **Paid** (automatic fail-open) | availability wins over cost |
+
+**ROI verdict**: if most of your agent's searches are in the first four rows,
+this pays for itself immediately and removes the rate-limit failure mode
+entirely. If your work is dominated by the fifth row, keep the paid key — use
+Chrysopoeia as the *measurement and fallback layer*, not as a replacement. The
+honest recommendation is **hybrid**, and the included report tells you which
+regime you are actually in.
+
+**Do not use this project if**: you need a contractual SLO, you cannot run
+Podman on a Linux host, you need guaranteed commercial indexing rights, or you
+want us to claim quality we have not measured.
 
 ## The pattern
 
@@ -90,9 +162,7 @@ A dependency-free Gentle Shell extension with three jobs:
 ./src/agent-fetch-report.sh           # local-vs-paid share + verdict
 ```
 
-The first real measurement in our deployment: **15 paid calls, 0 local, 5 of
-the paid ones errored — 0% local share**. Doctrine alone did not move the agent.
-That evidence justified an **opt-in, fail-open** guard:
+The first real measurement (15/0/5) justified an **opt-in, fail-open** guard:
 `FETCH_LOCAL_ENFORCE=1` blocks `web_search` only while the local stack answers.
 Default off. Merging changes nothing.
 
@@ -136,8 +206,8 @@ export FETCH_LOCAL_ENFORCE=1
 ## Tests
 
 ```bash
-bash tests/test-fetch.sh                  # 11 checks, offline stub servers
-node --test tests/test-degradation-status.mjs   # 23 checks, real .ts imported
+bash tests/test-fetch.sh                       # 11 checks, offline stub servers
+node --test tests/test-degradation-status.mjs  # 23 checks, real .ts imported
 ```
 
 Both suites are hermetic: no network, no credentials, no prompt text in logs.
@@ -171,6 +241,8 @@ trackers and cluster-side conventions live in the source homelab.
 4. **Measure before tightening policy.** A report is not a gate; a paid-first
    trend is the signal.
 5. **No harness coupling.** One extension file, no forks, no TUI patches.
+6. **Honesty over reach.** We claim content parity and cost, not semantic
+   superiority.
 
 ## Gentle Shell ecosystem
 
