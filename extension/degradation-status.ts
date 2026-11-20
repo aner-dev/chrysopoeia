@@ -25,6 +25,7 @@
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import { spawn } from "node:child_process";
+import { createHash } from "node:crypto";
 import * as fs from "node:fs";
 import * as net from "node:net";
 import * as os from "node:os";
@@ -50,6 +51,7 @@ const BASH_RE = /^bash$/i;
 // which provider served each search. One JSONL line per web_search/fetch_local
 // call, no prompt text, never fatal.
 const CHOICE_LOG_REL = path.join("agent-events", "provider-choice.jsonl");
+const OUTCOME_LOG_REL = path.join("agent-events", "search-outcome.jsonl");
 const LOCAL_TOOL_RE = /^fetch_local$/i;
 // Slice B: deterministic routing. Default OFF — enforcement is opt-in through
 // FETCH_LOCAL_ENFORCE=1 so merging this never changes anyone's behavior. When
@@ -535,6 +537,93 @@ export function appendChoice(
   }
 }
 
+/** Resolve the search-outcome log path from env, never throwing. */
+export function resolveOutcomeLogPath(env: Record<string, string | undefined> = process.env): string {
+  const stateHome = (env.XDG_STATE_HOME ?? "").trim();
+  const base = stateHome || path.join(os.homedir(), ".local", "state");
+  return path.join(base, OUTCOME_LOG_REL);
+}
+
+/** One-way query fingerprint: the raw query NEVER reaches a sink. */
+export function queryHashOf(event: unknown): string | null {
+  if (!event || typeof event !== "object") return null;
+  const input = (event as Record<string, unknown>).input;
+  if (!input || typeof input !== "object") return null;
+  const raw = (input as Record<string, unknown>).query ?? (input as Record<string, unknown>).url;
+  if (typeof raw !== "string" || !raw.trim()) return null;
+  return `sha256:${createHash("sha256").update(raw.trim()).digest("hex")}`;
+}
+
+/** Read the tail of the outcome log for retry correlation. Never throws. */
+export function readRecentOutcomes(outcomePath: string, maxBytes = 65536): Array<Record<string, unknown>> {
+  try {
+    const stat = fs.statSync(outcomePath);
+    if (!stat.isFile() || stat.size === 0) return [];
+    const start = Math.max(0, stat.size - maxBytes);
+    const fd = fs.openSync(outcomePath, "r");
+    try {
+      const buf = Buffer.allocUnsafe(stat.size - start);
+      const read = fs.readSync(fd, buf, 0, buf.length, start);
+      return buf.subarray(0, read).toString("utf8").split("\n")
+        .filter((l) => l.trim())
+        .map((l) => { try { const v = JSON.parse(l); return v && typeof v === "object" ? v as Record<string, unknown> : null; } catch { return null; } })
+        .filter((v): v is Record<string, unknown> => v !== null);
+    } finally { fs.closeSync(fd); }
+  } catch { return []; }
+}
+
+export interface OutcomeRecord {
+  queryHash: string;
+  provider: "local" | "paid";
+  tool: string;
+  klass?: string;
+  latencyMs?: number;
+  withContent?: number;
+  ok: boolean;
+}
+
+/** Append one outcome record. A paid search after a local one with the SAME
+ * hash within 60s gets retried_with — local did not serve. Never throws. */
+export function appendOutcome(outcomePath: string, record: OutcomeRecord): boolean {
+  try {
+    const dir = path.dirname(outcomePath);
+    fs.mkdirSync(dir, { recursive: true, mode: 0o700 });
+    let retriedWith: string | undefined;
+    if (record.provider === "paid") {
+      const now = Date.now();
+      const prior = readRecentOutcomes(outcomePath).find((r) => {
+        if (r.provider !== "local" || r.query_hash !== record.queryHash) return false;
+        const prev = Date.parse(String(r.ts ?? ""));
+        return Number.isFinite(prev) && now - prev < 60_000;
+      });
+      if (prior) retriedWith = String(prior.tool ?? "fetch_local");
+    }
+    const line: Record<string, unknown> = {
+      ts: new Date().toISOString(),
+      query_hash: record.queryHash,
+      provider: record.provider,
+      tool: trunc(record.tool, 40),
+      class: record.klass ? trunc(record.klass, 40) : undefined,
+      latency_ms: typeof record.latencyMs === "number" ? Math.round(record.latencyMs) : undefined,
+      with_content: typeof record.withContent === "number" ? record.withContent : undefined,
+      ok: record.ok === true,
+    };
+    if (retriedWith) line.retried_with = trunc(retriedWith, 40);
+    fs.appendFileSync(outcomePath, `${JSON.stringify(line)}\n`, { mode: 0o600 });
+    return true;
+  } catch { return false; }
+}
+
+function countWithContent(text: string): number {
+  try {
+    const parsed = JSON.parse(text.slice(0, 20_000));
+    const results = parsed && typeof parsed === "object" ? (parsed as { results?: unknown }).results : null;
+    return Array.isArray(results)
+      ? results.filter((r) => r && typeof r === "object" && String((r as { content?: unknown }).content ?? "").length > 200).length
+      : 0;
+  } catch { return 0; }
+}
+
 /** Is enforcement on? Default OFF, opt-in per environment. */
 export function enforceEnabled(env: Record<string, string | undefined> = process.env): boolean {
   return (env[ENFORCE_ENV] ?? "").trim() === "1";
@@ -770,19 +859,44 @@ export default function degradationStatus(
       // Provider-choice record: which provider served this search, and whether
       // the call itself succeeded. This is the measurement slice A needs —
       // without it, "is the agent using the local stack?" has no answer.
+      const resultText = resultTextOf(event);
+      const ok = !/\b(error|failed|exception)\b/i.test(resultText.slice(0, 400));
       try {
         const cwd = (ctxRef.current as { cwd?: unknown } | undefined)?.cwd;
         appendChoice(resolveChoiceLogPath(), {
           tool: name,
           cwd: typeof cwd === "string" ? cwd : "",
-          ok: !/\b(error|failed|exception)\b/i.test(resultTextOf(event).slice(0, 400)),
+          ok,
         });
       } catch {
         /* the choice log is observability, never semantics */
       }
 
+      // Outcome record (S4): one-way query hash + retry correlation. This is
+      // what turns "share" into "success rate" and answers what % is paid for.
+      try {
+        const hash = queryHashOf(event);
+        if (hash) {
+          const input = (event as { input?: Record<string, unknown> }).input ?? {};
+          const klass = typeof input.klass === "string" ? input.klass : undefined;
+          const ev = event as { duration_ms?: unknown; latency_ms?: unknown };
+          const latency = ev.duration_ms ?? ev.latency_ms;
+          appendOutcome(resolveOutcomeLogPath(), {
+            queryHash: hash,
+            provider: LOCAL_TOOL_RE.test(name) ? "local" : "paid",
+            tool: name,
+            klass,
+            latencyMs: typeof latency === "number" ? latency : undefined,
+            withContent: countWithContent(resultText),
+            ok,
+          });
+        }
+      } catch {
+        /* the outcome log is observability, never semantics */
+      }
+
       if (!WEB_SEARCH_RE.test(name)) return;
-      const marker = firstMarker(resultTextOf(event));
+      const marker = firstMarker(resultText);
       if (!marker) return;
       notify(ctxRef.current, `web_search degraded (${marker})`, "web_search");
     } catch {
