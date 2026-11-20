@@ -1,0 +1,77 @@
+{
+  "scores": {
+    "local": {
+      "answerability": 28,
+      "specificity": 28,
+      "freshness_fit": 34,
+      "actionability": 27
+    },
+    "exa": {
+      "answerability": 31,
+      "specificity": 35,
+      "freshness_fit": 34,
+      "actionability": 29
+    }
+  },
+  "wins": {
+    "local": 2,
+    "exa": 6,
+    "tie": 1
+  },
+  "detail": [
+    {
+      "id": "f01",
+      "winner": "exa",
+      "local_sum": 13,
+      "exa_sum": 12
+    },
+    {
+      "id": "f02",
+      "winner": "local",
+      "local_sum": 16,
+      "exa_sum": 14
+    },
+    {
+      "id": "f03",
+      "winner": "exa",
+      "local_sum": 14,
+      "exa_sum": 16
+    },
+    {
+      "id": "f04",
+      "winner": "local",
+      "local_sum": 15,
+      "exa_sum": 12
+    },
+    {
+      "id": "f05",
+      "winner": "exa",
+      "local_sum": 9,
+      "exa_sum": 15
+    },
+    {
+      "id": "f06",
+      "winner": "exa",
+      "local_sum": 9,
+      "exa_sum": 15
+    },
+    {
+      "id": "f07",
+      "winner": "exa",
+      "local_sum": 14,
+      "exa_sum": 19
+    },
+    {
+      "id": "f08",
+      "winner": "tie",
+      "local_sum": 11,
+      "exa_sum": 11
+    },
+    {
+      "id": "f09",
+      "winner": "exa",
+      "local_sum": 16,
+      "exa_sum": 15
+    }
+  ]
+}
