@@ -1,0 +1,30 @@
+{"id": "f01", "class": "error", "query": "k3s coredns ndots 5 cname external dns timeout", "pinned": "2026-11-20"}
+{"id": "f02", "class": "error", "query": "cilium envoy upstream_cx_none_healthy 503 egress gateway", "pinned": "2026-11-20"}
+{"id": "f03", "class": "error", "query": "flux kustomization drift detected patch failure", "pinned": "2026-11-20"}
+{"id": "f04", "class": "error", "query": "longhorn replica rebuild stuck volume detached", "pinned": "2026-11-20"}
+{"id": "f05", "class": "error", "query": "podman pasta rootless dns 10s delay container", "pinned": "2026-11-20"}
+{"id": "f06", "class": "error", "query": "forgejo actions checkout vendored action 404", "pinned": "2026-11-20"}
+{"id": "f07", "class": "freshness", "query": "victoriametrics vmsingle latest release 2026", "pinned": "2026-11-20"}
+{"id": "f08", "class": "freshness", "query": "cilium 1.21 release notes egress gateway", "pinned": "2026-11-20"}
+{"id": "f09", "class": "freshness", "query": "fluxcd notification controller new features 2026", "pinned": "2026-11-20"}
+{"id": "f10", "class": "freshness", "query": "rustfs latest release s3 compatibility", "pinned": "2026-11-20"}
+{"id": "f11", "class": "freshness", "query": "openbao 2.7 kv v2 changes", "pinned": "2026-11-20"}
+{"id": "f12", "class": "freshness", "query": "gentle-shell latest release extensions api", "pinned": "2026-11-20"}
+{"id": "f13", "class": "longtail", "query": "openbao kv v2 patch requires patch capability read-only token", "pinned": "2026-11-20"}
+{"id": "f14", "class": "longtail", "query": "cilium l7 policy envoy admin metrics 9964 port", "pinned": "2026-11-20"}
+{"id": "f15", "class": "longtail", "query": "externalsecret sops age cluster secret sync failed", "pinned": "2026-11-20"}
+{"id": "f16", "class": "longtail", "query": "kustomize components behavior with replacement transformer", "pinned": "2026-11-20"}
+{"id": "f17", "class": "longtail", "query": "victoriametrics metricsql last_over_time vs default _over_time", "pinned": "2026-11-20"}
+{"id": "f18", "class": "longtail", "query": "forgejo gitea cli pr create gitea token requires host", "pinned": "2026-11-20"}
+{"id": "f19", "class": "longtail", "query": "k3d cluster create cilium disable kube proxy alpinelabs", "pinned": "2026-11-20"}
+{"id": "f20", "class": "longtail", "query": "longhorn recurring job cron schedule timezone", "pinned": "2026-11-20"}
+{"id": "f21", "class": "bulk", "query": "terraform opentofu state backend s3 configuration", "pinned": "2026-11-20"}
+{"id": "f22", "class": "bulk", "query": "helm app-template values common main containers pattern", "pinned": "2026-11-20"}
+{"id": "f23", "class": "bulk", "query": "podman quadlet container network port binding example", "pinned": "2026-11-20"}
+{"id": "f24", "class": "bulk", "query": "kubernetes ciliumnetworkpolicy matchLabels namespace prefix", "pinned": "2026-11-20"}
+{"id": "f25", "class": "bulk", "query": "grafana provisioning datasource yaml api version", "pinned": "2026-11-20"}
+{"id": "f26", "class": "bulk", "query": "prometheus VMRule alert for absent metric", "pinned": "2026-11-20"}
+{"id": "f27", "class": "locale", "query": "kustomize overlays production staging ejemplo español", "pinned": "2026-11-20"}
+{"id": "f28", "class": "locale", "query": "políticas de red cilium en español ejemplo ingress", "pinned": "2026-11-20"}
+{"id": "f29", "class": "locale", "query": "flux gitops despliegue kustomization español", "pinned": "2026-11-20"}
+{"id": "f30", "class": "locale", "query": "vault openbao secretos kv v2 español", "pinned": "2026-11-20"}
