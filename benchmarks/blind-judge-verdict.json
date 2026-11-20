@@ -1,0 +1,74 @@
+{
+  "method": "blind A/B; independent subagent; no provider identity revealed; no web access",
+  "rubric": [
+    "answerability",
+    "specificity",
+    "freshness_fit",
+    "actionability"
+  ],
+  "judgments": [
+    {
+      "query_id": "f01",
+      "winner": "exa",
+      "local": 12,
+      "exa": 13,
+      "note": "A had ndots:5 cause + k3s knobs; B truncated before the fix."
+    },
+    {
+      "query_id": "f02",
+      "winner": "local",
+      "local": 16,
+      "exa": 14,
+      "note": "Local gave stale-endpoint root cause + diagnostic path; Exa listed related issues."
+    },
+    {
+      "query_id": "f03",
+      "winner": "exa",
+      "local": 14,
+      "exa": 16,
+      "note": "Exa named force=true and JSON-pointer ignore rules."
+    },
+    {
+      "query_id": "f04",
+      "winner": "local",
+      "local": 15,
+      "exa": 12,
+      "note": "Local had rebuild-loop root cause + recovery steps."
+    },
+    {
+      "query_id": "f05",
+      "winner": "exa",
+      "local": 9,
+      "exa": 15,
+      "note": "Local's top hits were generic; Exa matched TCP-DNS-via-pasta exactly."
+    },
+    {
+      "query_id": "f06",
+      "winner": "exa",
+      "local": 9,
+      "exa": 15,
+      "note": "Exa gave the vendored checkout URL and .forgejo/workflows path."
+    },
+    {
+      "query_id": "f07",
+      "winner": "exa",
+      "local": 14,
+      "exa": 19,
+      "note": "Exa pinned release date and matching Helm chart."
+    },
+    {
+      "query_id": "f08",
+      "winner": "tie",
+      "local": 11,
+      "exa": 11,
+      "note": "Neither source contained a 1.21 egress-gateway change."
+    },
+    {
+      "query_id": "f09",
+      "winner": "exa",
+      "local": 16,
+      "exa": 15,
+      "note": "Exa named notification-controller features across 2026."
+    }
+  ]
+}
