@@ -100,6 +100,15 @@ A reproducible harness is included in [`benchmarks/`](benchmarks/). First run:
 | locale | 0.580 | 0.650 | 0.89 |
 | **mean (v1, n=6)** | **0.763** | **0.783** | **97%** |
 
+> **Final effectiveness verdict — blind A/B judge (2026-11-20).** An independent
+> judge scored the full passages of the 9 paired queries without knowing which
+> provider produced them. Result: **Exa won 6, local won 2, 1 tie**; totals
+> 129 vs 117 of 180 (~10% Exa edge). Specificity was Exa's advantage (+0.78);
+> **freshness tied** (3.78 both). Availability still favours local 100% vs 30%.
+> See [`benchmarks/RESULTS-effectiveness.md`](benchmarks/RESULTS-effectiveness.md).
+> The 15 remaining answerable questions and their methods live in
+> [`benchmarks/OPEN-QUESTIONS.md`](benchmarks/OPEN-QUESTIONS.md).
+
 > **Superseded by the full run (n=30, 2026-11-20).** Exa keyless hit its rate
 > limit at query 10: it answered 9/30 and returned 429 on the other 21. The
 > local stack answered **30/30 with extracted content**. On the 9 paired
