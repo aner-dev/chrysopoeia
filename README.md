@@ -98,11 +98,23 @@ A reproducible harness is included in [`benchmarks/`](benchmarks/). First run:
 | longtail | 0.690 | 0.713 | 0.97 |
 | bulk | 0.816 | 0.810 | 1.01 |
 | locale | 0.580 | 0.650 | 0.89 |
-| **mean** | **0.763** | **0.783** | **97%** |
+| **mean (v1, n=6)** | **0.763** | **0.783** | **97%** |
 
-`python3 benchmarks/judge.py` reproduces it. Read [`benchmarks/RESULTS-v1.md`](benchmarks/RESULTS-v1.md)
-before quoting the number: it is a **surface proxy**, not an answer-quality
-judge, n=6, Exa keyless only.
+> **Superseded by the full run (n=30, 2026-11-20).** Exa keyless hit its rate
+> limit at query 10: it answered 9/30 and returned 429 on the other 21. The
+> local stack answered **30/30 with extracted content**. On the 9 paired
+> successes the surface ratio was **80%** (local 0.683 vs exa 0.852), lower than
+> v1's 97%. The larger sample is the one to trust. See
+> [`benchmarks/RESULTS-full.md`](benchmarks/RESULTS-full.md).
+
+| Availability (full run) | Local | Exa keyless |
+|---|---|---|
+| Queries answered | **30/30** | 9/30 |
+| Success rate | **100%** | **30%** |
+
+`python3 benchmarks/judge.py` reproduces the surface proxy. It is **not** an
+answer-quality judge. The full run has survivorship bias (Exa failed on the
+harder later classes), and the blind human/LLM judge is still open.
 
 ## What is NOT measured — do not extrapolate
 
@@ -138,9 +150,11 @@ metered resource on the searches that do not need it**:
 | Novel, ambiguous, long-tail conceptual research | **Paid** | index breadth and semantic ranking |
 | When the local stack is down | **Paid** (automatic fail-open) | availability wins over cost |
 
-**ROI verdict**: if most of your agent's searches are in the first four rows,
-this pays for itself immediately and removes the rate-limit failure mode
-entirely. If your work is dominated by the fifth row, keep the paid key — use
+**ROI verdict**: the full run showed the rate-limit failure mode directly —
+Exa keyless became unavailable after 9 queries while local kept answering. That
+availability difference, not a quality claim, is the main reason to adopt this.
+If most of your agent's searches are in the first four rows, it pays for itself
+immediately. If your work is dominated by the fifth row, keep the paid key — use
 Chrysopoeia as the *measurement and fallback layer*, not as a replacement. The
 honest recommendation is **hybrid**, and the included report tells you which
 regime you are actually in.
