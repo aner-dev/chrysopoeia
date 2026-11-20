@@ -278,6 +278,20 @@ benchmarks/
 This repository is the portable pattern. The production deployment, ODD
 trackers and cluster-side conventions live in the source homelab.
 
+## Experimental status
+
+Every claim above is backed by a reproducible experiment in [`benchmarks/`](benchmarks/):
+
+- Availability, content parity and the blind effectiveness verdict — `RESULTS-full.md`, `RESULTS-effectiveness.md`.
+- Fail-open under real fault injection (CRW stopped): search still exits 0 with 26 degraded results — `RESULTS-remaining.md`.
+- Filters: 669 raw results -> 567 (15.2%), 99 host-less redirects dropped, **0 false positives**.
+- Observer overhead: p50 0.089 ms, p95 0.664 ms (400 AB/BA calls).
+- Enforcement and retry-correlation mechanisms: `tests/test-session-behavior.mjs`.
+
+[`benchmarks/OPEN-QUESTIONS.md`](benchmarks/OPEN-QUESTIONS.md) tracks 15 questions with
+method, metric and kill criterion. The four that need a **paid** Exa key are
+deliberately left open: this project does not require paying any provider.
+
 ## Design rules
 
 1. **Fail open, always.** Stack down, missing checkout, probe throws → the paid
