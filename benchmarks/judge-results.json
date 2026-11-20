@@ -1,0 +1,44 @@
+[
+  {
+    "id": "q01",
+    "class": "error",
+    "local": 0.767,
+    "exa": 0.8,
+    "ratio": 0.96
+  },
+  {
+    "id": "q02",
+    "class": "error",
+    "local": 0.78,
+    "exa": 0.867,
+    "ratio": 0.9
+  },
+  {
+    "id": "q03",
+    "class": "freshness",
+    "local": 0.947,
+    "exa": 0.86,
+    "ratio": 1.1
+  },
+  {
+    "id": "q04",
+    "class": "longtail",
+    "local": 0.69,
+    "exa": 0.713,
+    "ratio": 0.97
+  },
+  {
+    "id": "q05",
+    "class": "bulk",
+    "local": 0.816,
+    "exa": 0.81,
+    "ratio": 1.01
+  },
+  {
+    "id": "q06",
+    "class": "locale",
+    "local": 0.58,
+    "exa": 0.65,
+    "ratio": 0.89
+  }
+]
