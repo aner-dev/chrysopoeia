@@ -1,0 +1,6 @@
+{"id":"q01","class":"error","query":"k3s coredns crashloop backoff after node reboot","pinned":"2026-11-20"}
+{"id":"q02","class":"error","query":"qemu vfio passthrough error 22 invalid argument","pinned":"2026-11-20"}
+{"id":"q03","class":"freshness","query":"cilium 1.20 egress gateway release notes","pinned":"2026-11-20"}
+{"id":"q04","class":"longtail","query":"openbao kv v2 patch data endpoint 404 read-only token","pinned":"2026-11-20"}
+{"id":"q05","class":"bulk","query":"podman quadlet container example rootless","pinned":"2026-11-20"}
+{"id":"q06","class":"locale","query":"kustomize overlays production staging ejemplo español","pinned":"2026-11-20"}
